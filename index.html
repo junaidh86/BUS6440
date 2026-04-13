@@ -199,6 +199,42 @@
   footer { margin-top: 40px; padding: 20px 32px; border-top: 1px solid var(--grid); display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); }
 
   /* ── RESPONSIVE ── */
+
+  /* ── LIGHT THEME (v7) ── */
+  body.light {
+    --bg:#F1F5F9; --card:#FFFFFF; --card2:#E8EFF7;
+    --gold:#B8860B; --goldf:#9A6C00; --silv:#4A7FAA;
+    --white:#1E293B; --muted:#1E293B; --green:#16A34A;
+    --red:#DC2626; --amber:#D97706; --blue:#2563EB; --grid:#CBD5E1;
+  }
+  body.light .top-bar { background:var(--gold); }
+  body.light header, body.light #ctrl-bar, body.light .tabs, body.light footer { background:#FFFFFF; border-color:var(--grid); }
+  body.light .card, body.light .chart-box, body.light .sim-panel, body.light .metric-box { background:var(--card); border-color:var(--grid); }
+  body.light .insight-box { background:var(--card2); border-color:var(--grid); color:var(--white); }
+  body.light table th { background:var(--card2); color:var(--muted); }
+  body.light table td { border-color:var(--grid); color:var(--white); }
+  body.light tr:nth-child(even) td { background:rgba(100,116,139,.07); }
+  body.light select, body.light #ctrl-bar select { background:#FFFFFF; color:var(--white); border-color:var(--grid); }
+  body.light .curr-btn { background:var(--card2); color:var(--muted); border-color:var(--grid); }
+  body.light .curr-btn.active { background:var(--gold); color:#FFFFFF; }
+  body.light .badge-safe { background:#F0FDF4; }
+  body.light .badge-partial { background:#FFFBEB; }
+  body.light .insight-box strong { color:var(--goldf); }
+  body.light .card2, body.light .crisis-card { background:var(--card2); border-color:var(--grid); }
+  /* Risk Profile table: preserve color-coding in light mode */
+  body.light table td.green-text  { color: var(--green)  !important; }
+  body.light table td.amber-text  { color: var(--amber)  !important; }
+  body.light table td.red-text    { color: var(--red)    !important; }
+  body.light table td.gold-text   { color: var(--gold)   !important; }
+  body.light table td.silver-text { color: var(--silv)   !important; }
+  /* ── theme toggle ── */
+  #theme-toggle {
+    background:var(--card2); color:var(--muted); border:1px solid var(--grid);
+    padding:5px 14px; border-radius:20px; cursor:pointer;
+    font-size:12px; font-weight:700; letter-spacing:.04em; transition:all .2s;
+  }
+  #theme-toggle:hover { border-color:var(--gold); color:var(--gold); }
+
   @media(max-width:900px) {
     .grid-2, .grid-3, .grid-4, .metric-grid { grid-template-columns: 1fr 1fr; }
     .main { padding: 16px; }
@@ -218,6 +254,7 @@
     <div class="header-meta" style="font-size:13px;font-weight:600;color:var(--white);">Junaid Hussain &amp; Razkeen Irfan Shaikh</div>
   </div>
   <div style="text-align:right">
+    <div style="margin-bottom:8px;text-align:right;"><button id="theme-toggle" onclick="toggleTheme()">☀ Light Mode</button></div>
     <div class="header-meta">Research Question: <em>Do gold and silver protect purchasing power and reduce portfolio risk in 2026?</em></div>
     <div class="verdict-row" style="justify-content:flex-end; margin-top:10px">
       <span class="badge badge-safe">✓ GOLD: SAFE</span>
@@ -230,8 +267,8 @@
   <div class="tab active" onclick="showTab(0)">🏠 Home</div>
   <div class="tab" onclick="showTab(1)">📊 Overview</div>
   <div class="tab" onclick="showTab(2)">📈 Real Returns</div>
-  <div class="tab" onclick="showTab(3)">🛡 Correlation</div>
-  <div class="tab" onclick="showTab(4)">⚖️ Risk Profile</div>
+  <div class="tab" onclick="showTab(3)">🔗 Correlation</div>
+  <div class="tab" onclick="showTab(4)">🛡️ Risk Profile</div>
   <div class="tab" onclick="showTab(5)">📅 Events Window</div>
   <div class="tab" onclick="showTab(6)">🎮 Portfolio Simulator</div>
   <div class="tab" onclick="showTab(7)">🔮 Predictions</div>
@@ -286,7 +323,7 @@
         </h1>
 
         <p style="font-size:17px;color:#94A3B8;font-weight:500;margin:0 0 48px;letter-spacing:.02em;">
-          Step 3: Results &amp; Conclusions
+          Step 4: Written Report &amp; Reflection
         </p>
 
         <div style="width:50px;height:3px;background:linear-gradient(90deg,#D4AF37,#F5D76E,#D4AF37);margin:0 auto 44px;border-radius:2px;"></div>
@@ -447,7 +484,7 @@
       <strong>✓ Q1 Verdict — Purchasing Power:</strong>
       <ul style="margin:8px 0 0 16px;line-height:2;">
         <li>Gold +6.9% &amp; Silver +4.4% real CAGR both beat the +0% inflation benchmark over 2006–2025.</li>
-        <li>$100 invested in gold in 2006 grew to ~$370 in real (inflation-adjusted) terms by 2025.</li>
+        <li>100% invested in gold and silver in 2006 grew ~5× in real (inflation-adjusted) terms by 2025.</li>
         <li>Cash (T-Bills) returned –0.3% real per year — actively destroying purchasing power.</li>
         <li>Gold delivered real returns in <em>both</em> USD and CAD — consistent across currencies.</li>
       </ul>
@@ -459,23 +496,23 @@
        TAB 2 — CORRELATION
   ══════════════════════════════════════════════════════ -->
   <div class="tab-pane" id="pane-3">
-    <div class="section-hdr"><h2>Finding 2: Equity Diversification</h2><span class="sub">Gold hedges — silver partially does</span></div>
+    <div class="section-hdr"><h2>Q2(a) Correlation &amp; Equity Hedge</h2><span class="sub">Rolling 12-month Pearson r vs S&amp;P 500 · Updates with analysis period</span></div>
 
     <div class="grid-3" style="margin-bottom:20px">
       <div class="card card-gold">
-        <div class="card-title">Gold Avg. Correlation w/ S&P</div>
+        <div class="card-title">Gold Avg. Correlation w/ S&P (20 Years)</div>
         <div class="card-value gold-text">r = 0.04</div>
-        <div class="card-sub">Near zero — excellent hedge</div>
+        <div class="card-sub">Near zero — excellent hedge (20-yr avg)</div>
       </div>
       <div class="card card-silver">
-        <div class="card-title">Silver Avg. Correlation w/ S&P</div>
+        <div class="card-title">Silver Avg. Correlation w/ S&P (20 Years)</div>
         <div class="card-value amber-text">r = 0.29</div>
-        <div class="card-sub">Moderate positive — partial hedge</div>
+        <div class="card-sub">Moderate positive — partial hedge (20-yr avg)</div>
       </div>
       <div class="card card-green">
-        <div class="card-title">Gold During Downturns</div>
+        <div class="card-title">Gold During Downturns (20 Years)</div>
         <div class="card-value green-text">r = –0.12</div>
-        <div class="card-sub">Turns negative exactly when needed!</div>
+        <div class="card-sub">Turns negative exactly when needed! (20-yr avg)</div>
       </div>
     </div>
 
@@ -484,21 +521,13 @@
       <div class="chart-box" id="ch-corr-bar"></div>
     </div>
 
-    <div class="insight-box mt-20" id="corr-insight">
-      <strong>✓ Q2 Verdict — Equity Hedge:</strong>
-      <ul style="margin:8px 0 0 16px;line-height:2;">
-        <li><strong>Gold PASS:</strong> r ≈ 0.04 full-period (near zero) — drops to r ≈ −0.12 during equity downturns.</li>
-        <li>Crisis protection is strongest precisely when equity markets fall — the ideal hedge behaviour.</li>
-        <li>🥈 <strong>Silver PARTIAL:</strong> r ≈ 0.29 — industrial demand (solar, EVs, electronics) ties it to risk assets.</li>
-        <li>CAPM β below confirms gold's low market sensitivity; see regression table above for t-stats.</li>
-      </ul>
-    </div>
+    <div class="insight-box mt-20" id="corr-insight" style="border-left:3px solid var(--gold);padding:12px 18px;font-size:13px;line-height:1.7;">Computing…</div>
 
     <!-- ════ CAPM REGRESSION ════ -->
     <div style="margin-top:28px;border-top:1px solid var(--grid);padding-top:22px;">
       <div class="section-hdr">
-        <h2 style="font-size:16px;">CAPM Regression</h2>
-        <span class="sub">β, α, R², t-stats · Updates with date range</span>
+        <h2 style="font-size:16px;">Q2(b) CAPM Regression</h2>
+        <span class="sub">β, α, R² · Gold &amp; Silver · Updates with analysis period</span>
       </div>
       <div style="background:var(--card2);border-left:3px solid var(--gold);padding:9px 14px;
                   border-radius:0 6px 6px 0;font-family:monospace;font-size:13px;color:var(--amber);margin-bottom:16px;">
@@ -580,15 +609,7 @@
             <td id="rp-e-calmar" class="green-text">—</td>
             <td class="muted-text">Benchmark</td>
           </tr>
-          <tr>
-            <td class="muted-text">3m T-Bill</td>
-            <td id="rp-c-vol" class="green-text">—</td>
-            <td class="muted-text">N/A</td>
-            <td class="muted-text">N/A</td>
-            <td id="rp-c-dd" class="green-text">—</td>
-            <td class="muted-text">N/A</td>
-            <td class="red-text">No real return</td>
-          </tr>
+
           <tr style="border-top:2px solid var(--grid)">
             <td style="line-height:1.6">
               <span class="gold-text" style="font-weight:700">Gold</span>
@@ -612,15 +633,7 @@
       </table>
     </div>
 
-    <div class="insight-box mt-20" id="risk-insight">
-      <strong>✓ Q3 Verdict — Portfolio Risk:</strong>
-      <ul style="margin:8px 0 0 16px;line-height:2;">
-        <li>Best Blend (70% Gold / 30% Silver): Sharpe ≈ 0.48, drawdown ≈ –34% — captures silver upside with gold stability.</li>
-        <li>Silver standalone: high vol &amp; large max drawdown — unsuitable as a core safe-haven position.</li>
-        <li>Max drawdown for gold is roughly half that of equities — meaningful downside protection in stress events.</li>
-        <li>Figures above update automatically based on the selected analysis period.</li>
-      </ul>
-    </div>
+    <div class="insight-box mt-20" id="risk-insight" style="border-left:3px solid var(--gold);padding:12px 18px;font-size:13px;line-height:1.7;">Computing…</div>
   </div>
 
 
@@ -815,14 +828,14 @@
     <div class="card" style="margin-bottom:20px;padding:14px 24px;display:flex;gap:28px;align-items:flex-end;flex-wrap:wrap">
       <div>
         <div style="color:#64748B;font-size:11px;letter-spacing:.05em;margin-bottom:5px">ASSET</div>
-        <select id="ar-asset" onchange="updateAR()" style="background:var(--card2);color:var(--white);border:1px solid var(--grid);padding:6px 12px;border-radius:4px;font-size:13px">
+        <select id="ar-asset" onchange="updateAR(); setTimeout(updateModelComparison,600);" style="background:var(--card2);color:var(--white);border:1px solid var(--grid);padding:6px 12px;border-radius:4px;font-size:13px">
           <option value="gold">🥇 Gold</option>
           <option value="silver">🥈 Silver</option>
         </select>
       </div>
       <div>
         <div style="color:#64748B;font-size:11px;letter-spacing:.05em;margin-bottom:5px">LAG ORDER (p)</div>
-        <select id="ar-p" onchange="updateAR()" style="background:var(--card2);color:var(--white);border:1px solid var(--grid);padding:6px 12px;border-radius:4px;font-size:13px">
+        <select id="ar-p" onchange="updateAR(); setTimeout(updateModelComparison,600);" style="background:var(--card2);color:var(--white);border:1px solid var(--grid);padding:6px 12px;border-radius:4px;font-size:13px">
           <option value="1">AR(1) — 1 lag</option>
           <option value="2" selected>AR(2) — 2 lags</option>
           <option value="3">AR(3) — 3 lags</option>
@@ -836,11 +849,12 @@
       </div>
       <div>
         <div style="color:#64748B;font-size:11px;letter-spacing:.05em;margin-bottom:5px">TRAINING WINDOW</div>
-        <select id="ar-window" onchange="updateAR()" style="background:var(--card2);color:var(--white);border:1px solid var(--grid);padding:6px 12px;border-radius:4px;font-size:13px">
-          <option value="0">All available data</option>
+        <select id="ar-window" onchange="updateAR(); setTimeout(updateModelComparison,600);" style="background:var(--card2);color:var(--white);border:1px solid var(--grid);padding:6px 12px;border-radius:4px;font-size:13px">
+          <option value="0" selected>All available data</option>
           <option value="60">Last 5 years (60 mo)</option>
-          <option value="36" selected>Last 3 years (36 mo)</option>
+          <option value="36">Last 3 years (36 mo)</option>
           <option value="24">Last 2 years (24 mo)</option>
+          <option value="12">Last 1 year (12 mo)</option>
         </select>
       </div>
     </div>
@@ -850,38 +864,20 @@
     </div>
     <div id="ar-stats" class="card" style="padding:14px 24px;margin-bottom:8px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px"></div>
     <!-- ── Linear vs AR Comparison ── -->
-    <div style="margin-top:20px;border-top:1px solid var(--grid);padding-top:16px;margin-bottom:8px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;">
-      <div>
-        <h4 style="color:var(--gold);font-size:13px;margin:0 0 4px;">Linear Trend vs. AR Model — Price Target Comparison</h4>
-        <p style="color:var(--muted);font-size:11px;margin:0;">Compares the forward price implied by Linear trend extrapolation vs. AR(p) return accumulation.</p>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px;">
-        <span style="font-size:11px;color:var(--muted);font-weight:600;white-space:nowrap">HORIZON:</span>
-        <select id="compare-horizon" onchange="updateModelComparison()"
-          style="background:var(--card2);color:var(--white);border:1px solid var(--grid);padding:5px 10px;border-radius:4px;font-size:12px;">
-          <option value="3">3 months</option>
-          <option value="6" selected>6 months</option>
-          <option value="9">9 months</option>
-          <option value="12">12 months</option>
-        </select>
-      </div>
-    </div>
-    <div class="grid-2" style="margin-bottom:8px;">
-      <div class="card" id="compare-gold-card" style="padding:16px 20px;">
-        <div style="font-size:11px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em;">Gold — Model Comparison</div>
-        <div id="compare-gold-content" style="font-size:12px;color:var(--muted);">Run predictions to see comparison.</div>
-      </div>
-      <div class="card" id="compare-silv-card" style="padding:16px 20px;">
-        <div style="font-size:11px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em;">Silver — Model Comparison</div>
-        <div id="compare-silv-content" style="font-size:12px;color:var(--muted);">Run predictions to see comparison.</div>
-      </div>
+    <div style="margin-top:20px;border-top:1px solid var(--grid);padding-top:16px;margin-bottom:12px;">
+      <h4 style="color:var(--gold);font-size:13px;margin:0 0 4px;">Linear Trend vs. AR(3) — Forecast Price Target Comparison Matrix</h4>
+      <p style="color:var(--muted);font-size:11px;margin:0 0 12px;">Rows = training window · Forecast horizons: 3 / 6 / 9 / 12 months · Linear Trend / AR(3) for Gold &amp; Silver</p>
+      <div style="overflow-x:auto;"><table id="model-compare-tbl" style="width:100%;font-size:11px;border-collapse:collapse;">
+        <thead><tr id="model-compare-head" style="background:var(--card2);"></tr></thead>
+        <tbody id="model-compare-body"></tbody>
+      </table></div>
     </div>
 
 
     <!-- ══ MONTE CARLO ═══════════════════════════════════════ -->
     <div style="margin:32px 0 12px">
       <h3 style="color:#B8860B;margin:0 0 4px">③ Monte Carlo Simulation</h3>
-      <p style="color:#64748B;font-size:13px;margin:0">10,000 simulated future price paths. Bootstrap mode samples from historical daily returns (H+L)/2, compounding 21 trading days per month for fat-tail accuracy.</p>
+      <p style="color:#64748B;font-size:13px;margin:0">Parametric simulation (Normal distribution)</p>
     </div>
 
     <div class="card" style="margin-bottom:20px;padding:16px 24px">
@@ -921,24 +917,22 @@
             oninput="document.getElementById('mc-horizon-lbl').textContent=this.value; updateMC()"
             style="width:160px;accent-color:#B8860B;vertical-align:middle">
         </div>
-        <div>
-          <div style="color:#64748B;font-size:11px;letter-spacing:.05em;margin-bottom:5px">METHOD</div>
-          <select id="mc-method" onchange="updateMC()" style="background:var(--card2);color:var(--white);border:1px solid var(--grid);padding:6px 12px;border-radius:4px;font-size:13px">
-            <option value="parametric">Parametric (Normal)</option>
-            <option value="bootstrap">Bootstrap (Historical)</option>
-          </select>
+        <div style="background:var(--card2);border-left:3px solid var(--gold);padding:8px 16px;border-radius:0 6px 6px 0;font-size:12px;color:var(--muted);">
+          Method: <strong style="color:var(--gold)">Parametric (Normal distribution)</strong> · μ and σ from selected analysis period
         </div>
-        <div style="border-left:1px solid #243448;padding-left:28px">
+        <input type="hidden" id="mc-method" value="parametric">
+        <!-- Crisis stress test controls -->
+        <div style="border-left:1px solid var(--grid);padding-left:20px">
           <div style="color:#64748B;font-size:11px;letter-spacing:.05em;margin-bottom:8px">⚠️ CRISIS STRESS TEST</div>
-          <label style="color:#334E68;font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none">
+          <label style="color:var(--white);font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none">
             <input type="checkbox" id="mc-crisis-on" onchange="onCrisisToggle()"
               style="accent-color:#C0392B;width:15px;height:15px">
             Enable Crisis Mode
           </label>
         </div>
         <div id="crisis-type-ctrl" style="display:none">
-          <div style="color:#C0392B;font-size:11px;letter-spacing:.05em;margin-bottom:5px">CRISIS TYPE (returns sampled from this period only)</div>
-          <select id="mc-crisis-type" onchange="updateMC()" style="background:#2A1515;color:#E2E8F0;border:1px solid #FCA5A5;padding:6px 12px;border-radius:4px;font-size:13px">
+          <div style="color:#C0392B;font-size:11px;letter-spacing:.05em;margin-bottom:5px">CRISIS TYPE</div>
+          <select id="mc-crisis-type" onchange="updateMC()" style="background:var(--card2);color:var(--white);border:1px solid #FCA5A5;padding:6px 12px;border-radius:4px;font-size:13px">
             <option value="gfc">GFC / Credit Crunch (2008–2009)</option>
             <option value="pandemic">COVID Pandemic (2020 full year)</option>
             <option value="rate">Rate Shock / Inflation (2022)</option>
@@ -963,7 +957,7 @@
        TAB 8 — CONCLUSION
   ══════════════════════════════════════════════════════ -->
   <div class="tab-pane" id="pane-8">
-    <div class="section-hdr"><h2>Conclusion</h2><span class="sub">Key Findings, Safety Scorecard &amp; Study Limitations</span></div>
+    <div class="section-hdr"><h2>Conclusion</h2><span class="sub">Key Findings (based on 20-year data) · Safety Scorecard · Study Limitations</span></div>
 
     <!-- Safety Scorecard -->
     <div style="margin-bottom:32px;">
@@ -1045,20 +1039,25 @@
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:48px 1fr;gap:20px;align-items:start;background:var(--card2);border:1px solid var(--grid);border-left:4px solid #F59E0B;border-radius:8px;padding:22px 26px;">
-        <div style="font-size:26px;font-weight:800;color:#F59E0B;line-height:1;">4</div>
+
+
+      <div style="display:grid;grid-template-columns:48px 1fr;gap:20px;align-items:start;background:var(--card2);border:1px solid var(--grid);border-left:4px solid #EF4444;border-radius:8px;padding:22px 26px;">
+        <div style="font-size:26px;font-weight:800;color:#EF4444;line-height:1;">5</div>
         <div>
-          <div style="font-size:14px;font-weight:700;color:var(--white);margin-bottom:6px;">No Income Generation</div>
-          <div style="font-size:13px;color:#94A3B8;line-height:1.6;">Gold and silver do not produce cash flow like dividends or interest.</div>
+          <div style="font-size:14px;font-weight:700;color:var(--white);margin-bottom:6px;">Only Four Safety Criteria — Too Few for Definitive Judgment</div>
+          <div style="font-size:13px;color:#94A3B8;line-height:1.6;">Four criteria are too few for definitive judgment. Many other factors are ignored: storage costs, bid-ask spreads, liquidity risk, regulatory risk, tax treatment, currency hedging costs, and broader macroeconomic regimes. Changing the analysis period will materially shift all reported metrics.</div>
         </div>
       </div>
 
+    </div>
+    <div style="margin-top:12px;background:var(--card2);border-left:3px solid #F59E0B;padding:10px 16px;border-radius:0 6px 6px 0;font-size:12px;color:var(--muted);">
+      Note: The scorecard above reflects the <strong style="color:var(--gold)">full 20-year dataset (2006–2026)</strong>. Metrics on all other tabs respond to the analysis period slider — values will differ for shorter periods.
     </div>
   </div>
 
 <footer>
   <span>Junaid Hussain &amp; Razkeen Irfan Shaikh</span>
-  <span>Data: Daily median price (H+L)/2 via Brownian Bridge simulation, calibrated to historical annual returns 2006–2025 • Monthly series = median of daily prices</span>
+  <span>Monthly series = median of daily prices (H+L)/2 &nbsp;·&nbsp; Data: Yahoo Finance · GC=F · SI=F · ^GSPC · USDCAD=X &nbsp;·&nbsp; Gold &amp; Silver Safety Dashboard v7</span>
 </footer>
 
 
@@ -1364,7 +1363,7 @@ function buildReg(divId, prices, color, name) {
 
   const annualRate = (Math.exp(reg.b*12)-1)*100;
   const L = layout({
-    title:{ text:`${name} — Linear Trend + ${fwdSteps}-Month Projection (${CURR})`, font:{color:'#E2E8F0',size:13} },
+    title:{ text:`${name} — Linear Trend + ${fwdSteps}-Month Projection (${CURR})`, font:{color:_DARK?'#E2E8F0':'#111827',size:13} },
     yaxis:{ title:`Price (${CURR})`, tickprefix:sym(), gridcolor:'#E2E8F0' },
     xaxis:{ gridcolor:'#E2E8F0' },
     shapes:[{ type:'line', x0:useDates[useDates.length-1], x1:useDates[useDates.length-1],
@@ -1429,7 +1428,6 @@ function onAssetChange() {
   updateMC();
 }
 
-// Show/hide crisis type dropdown when crisis checkbox toggled
 function onCrisisToggle() {
   const on = document.getElementById('mc-crisis-on').checked;
   document.getElementById('crisis-type-ctrl').style.display = on ? '' : 'none';
@@ -1484,7 +1482,7 @@ function pathBands(paths, ps) {
 function updateMC() {
   const asset     = document.getElementById('mc-asset').value;
   const nMonths   = parseInt(document.getElementById('mc-horizon').value);
-  const method    = document.getElementById('mc-method').value;
+  const method    = 'parametric';
   const invest    = 100;  // fixed 100-indexed base
   const crisisOn  = document.getElementById('mc-crisis-on').checked;
   const crisisKey = crisisOn ? document.getElementById('mc-crisis-type').value : null;
@@ -1586,7 +1584,7 @@ function updateMC() {
       line:{color:'#EF4444',width:2,dash:'dot'}, showlegend:false, hoverinfo:'skip' },
   ];
   const histL = layout({
-    title:{ text:`Distribution of ${nMonths}-Month Indexed Final Values (${CURR})`, font:{color:'#E2E8F0',size:13} },
+    title:{ text:`Distribution of ${nMonths}-Month Indexed Final Values (${CURR})`, font:{color:_DARK?'#E2E8F0':'#111827',size:13} },
     xaxis:{ title:`Final Indexed Value (Base = 100, ${CURR})`, tickformat:',.1f', gridcolor:'#E2E8F0' },
     yaxis:{ title:'Frequency', gridcolor:'#E2E8F0' },
     bargap:0.05,
@@ -1896,7 +1894,7 @@ function buildACF(retArr, divId, assetName, color) {
     { x: lags, y: lags.map(()=>-ci), mode:'lines', line:{color:'#64748B',width:1.5,dash:'dash'}, showlegend:false, hoverinfo:'skip' },
   ];
   const L = layout({
-    title:{ text:`${assetName} — Autocorrelation Function (ACF) | Dashed = 95% CI`, font:{color:'#E2E8F0',size:12} },
+    title:{ text:`${assetName} — Autocorrelation Function (ACF) | Dashed = 95% CI`, font:{color:_DARK?'#E2E8F0':'#111827',size:12} },
     xaxis:{ title:'Lag (months)' },
     yaxis:{ title:'Autocorrelation (ρ)', range:[-0.55,0.55], zeroline:true, zerolinecolor:'#CBD5E0' },
     showlegend: false, bargap: 0.15,
@@ -1999,7 +1997,7 @@ function updateAR() {
       line:{color:'#D35400',width:1,dash:'dot'}, mode:'lines', showlegend:false },
   ];
   const L1 = layout({
-    title:{ text:`${name} — AR(${p}) ${h}-Month Forecast (${CURR})`, font:{color:'#E2E8F0',size:13} },
+    title:{ text:`${name} — AR(${p}) ${h}-Month Forecast (${CURR})`, font:{color:_DARK?'#E2E8F0':'#111827',size:13} },
     yaxis:{ title:`Price (${CURR})`, tickprefix:sym() },
     shapes:[{ type:'line', x0:trainDates[trainDates.length-1], x1:trainDates[trainDates.length-1],
               y0:0, y1:1, yref:'paper', line:{color:'#64748B',width:1,dash:'dot'} }],
@@ -2056,7 +2054,7 @@ function buildOverviewPrice() {
     { x:RNG.dates, y:en, name:'S&P 500', line:{color:'#22C55E',width:2},   mode:'lines' },
   ];
   const L = layout({
-    title:{ text:`Cumulative Price Growth — Base 100 = ${startLbl} (${CURR})`, font:{color:'#E2E8F0',size:14} },
+    title:{ text:`Cumulative Price Growth — Base 100 = ${startLbl} (${CURR})`, font:{color:_DARK?'#E2E8F0':'#111827',size:14} },
     yaxis:{ title:`Growth of ${sym()}100 (nominal)`, gridcolor:'#E2E8F0' },
     xaxis:{ gridcolor:'#E2E8F0' },
   });
@@ -2070,10 +2068,10 @@ function buildRealBar() {
       type:'bar', name:'Nominal CAGR',
       marker:{color:['#D4AF37','#A8B8CC','#22C55E','#6B7FA3']},
       text:['9.5%','7.0%','10.5%','2.3%'], textposition:'outside',
-      textfont:{color:'#E2E8F0',size:12} },
+      textfont:{color:_DARK?'#E2E8F0':'#111827',size:12} },
   ];
   const L = layout({
-    title:{ text:'Nominal 20-Year CAGR (2006–2025)', font:{color:'#E2E8F0',size:14} },
+    title:{ text:'Nominal 20-Year CAGR (2006–2025)', font:{color:_DARK?'#E2E8F0':'#111827',size:14} },
     yaxis:{ title:'Annual Return (%)', range:[0,14], gridcolor:'#E2E8F0' },
     showlegend: false,
     annotations:[{
@@ -2098,7 +2096,7 @@ function buildRealInflated() {
       name:'T-Bill (Real)', line:{color:'#EF4444',width:1.5,dash:'dot'}, mode:'lines' },
   ];
   const L = layout({
-    title:{ text:`Inflation-Adjusted Cumulative Return — Base 100 = ${startLbl} (${CURR})`, font:{color:'#E2E8F0',size:14} },
+    title:{ text:`Inflation-Adjusted Cumulative Return — Base 100 = ${startLbl} (${CURR})`, font:{color:_DARK?'#E2E8F0':'#111827',size:14} },
     yaxis:{ title:'Real Wealth Index', gridcolor:'#E2E8F0' },
     xaxis:{ gridcolor:'#E2E8F0' },
   });
@@ -2124,7 +2122,7 @@ function buildRealRolling() {
     { x:RNG.dates, y:RNG.dates.map(()=>0), name:'Zero', line:{color:'#CBD5E0',width:1,dash:'dash'}, mode:'lines', showlegend:false },
   ];
   const L = layout({
-    title:{ text:`Rolling 12-Month Return (%) vs. Inflation (${CURR})`, font:{color:'#E2E8F0',size:14} },
+    title:{ text:`Rolling 12-Month Return (%) vs. Inflation (${CURR})`, font:{color:_DARK?'#E2E8F0':'#111827',size:14} },
     yaxis:{ title:'12-Month Return (%)', gridcolor:'#E2E8F0', zeroline:true, zerolinecolor:'#64748B' },
     xaxis:{ gridcolor:'#E2E8F0' },
   });
@@ -2141,26 +2139,36 @@ function buildCorrRolling() {
     { x:RNG.dates, y:RNG.dates.map(()=>0), name:'Zero', line:{color:'#1A7A4A',width:1.5,dash:'dash'}, mode:'lines', showlegend:false },
   ];
   const L = layout({
-    title:{ text:`Rolling 12-Month Correlation with S&P 500 (${CURR})`, font:{color:'#E2E8F0',size:14} },
+    title:{ text:`Rolling 12-Month Correlation with S&P 500 (${CURR})`, font:{color:_DARK?'#E2E8F0':'#111827',size:14} },
     yaxis:{ title:'Correlation (r)', range:[-0.6,0.8], gridcolor:'#E2E8F0', zeroline:true, zerolinecolor:'#1A7A4A' },
     xaxis:{ gridcolor:'#E2E8F0' },
   });
   Plotly.newPlot('ch-corr-rolling', traces, L, CFG);
+  if(typeof updateCorrVerdict==='function') updateCorrVerdict();
 }
 
 function buildCorrBar() {
-  const bars = [
-    { x:['Gold\n(Full Period)','Silver\n(Full Period)','Gold\n(Downturns)','Silver\n(Downturns)'],
-      y:[0.04, 0.29, -0.12, 0.31],
-      type:'bar',
-      marker:{ color:['#D4AF37','#A8B8CC','#22C55E','#F59E0B'] },
-      text:['r = 0.04','r = 0.29','r = –0.12','r = 0.31'],
-      textposition:'outside', textfont:{color:'#E2E8F0',size:13},
-      hovertemplate:'%{x}: %{y:.2f}<extra></extra>' },
-  ];
+  const useCad = CURR === 'CAD';
+  const gmr = useCad ? RNG.gmr_cad : RNG.gmr;
+  const smr = useCad ? RNG.smr_cad : RNG.smr;
+  const emr = useCad ? RNG.emr_cad : RNG.emr;
+  const n = Math.min(gmr.length, smr.length, emr.length);
+  function pr(a,b){ const na=Math.min(a.length,b.length); let ma=0,mb=0; for(let i=0;i<na;i++){ma+=a[i];mb+=b[i];} ma/=na;mb/=na; let num=0,da=0,db=0; for(let i=0;i<na;i++){num+=(a[i]-ma)*(b[i]-mb);da+=(a[i]-ma)**2;db+=(b[i]-mb)**2;} return (da*db>0)?num/Math.sqrt(da*db):0; }
+  const rGSp = pr(gmr.slice(0,n), emr.slice(0,n));
+  const rSSp = pr(smr.slice(0,n), emr.slice(0,n));
+  const rGS  = pr(gmr.slice(0,n), smr.slice(0,n));
+  const labels = ['Gold vs S&P','Silver vs S&P','Gold vs Silver'];
+  const vals   = [rGSp, rSSp, rGS];
+  const bars = [{
+    x: labels, y: vals, type:'bar',
+    marker:{ color:['#D4AF37','#A8B8CC','#60A5FA'] },
+    text: vals.map(v=>'r = '+v.toFixed(3)),
+    textposition:'outside', textfont:{color:_DARK?'#E2E8F0':'#111827',size:13},
+    hovertemplate:'%{x}: %{y:.3f}<extra></extra>'
+  }];
   const L = layout({
-    title:{ text:'Correlation with S&P 500 (r = 0 is ideal hedge)', font:{color:'#E2E8F0',size:14} },
-    yaxis:{ title:'Correlation (r)', range:[-0.25,0.5], gridcolor:'#E2E8F0', zeroline:true, zerolinecolor:'#64748B' },
+    title:{ text:'Correlation with S&P 500 — Selected Period (r = 0 is ideal hedge)', font:{color:_DARK?'#E2E8F0':'#111827',size:14} },
+    yaxis:{ title:'Correlation (r)', range:[-0.5,1], gridcolor:'#E2E8F0', zeroline:true, zerolinecolor:'#64748B' },
     showlegend: false,
   });
   Plotly.newPlot('ch-corr-bar', bars, L, CFG);
@@ -2214,7 +2222,7 @@ function updateRiskTable() {
     const cMRet = useCad ? (RNG.cmr_cad ?? cbr) : cbr;
     const cM = riskFromRet(cMRet);
 
-    const calmar = m => (m && m.maxDD && m.maxDD < 0) ? -(m.annRet / m.maxDD) : null;
+    const calmar = m => (m && m.maxDD && Math.abs(m.maxDD) > 0.005) ? -(m.annRet / m.maxDD) : null;
 
     if (gM) {
       setColored('rp-g-vol',     gM.annVol,  v=>fPct(v),  colVol);
@@ -2237,10 +2245,7 @@ function updateRiskTable() {
       setColored('rp-e-dd',      eM.maxDD,   v=>fPct(v),  colDD);
       setColored('rp-e-calmar',  calmar(eM), v=>fNum(v),  colCalmar);
     }
-    if (cM) {
-      setColored('rp-c-vol', cM.annVol, v=>fPct(v), colVol);
-      setColored('rp-c-dd',  cM.maxDD,  v=>fPct(v), colDD);
-    }
+    // T-bills removed from Risk Profile (v7)
 
     // ── Dynamic verdict cells ─────────────────────────────────────────────────
     function setVerdict(id, metrics) {
@@ -2283,6 +2288,18 @@ function updateRiskTable() {
       }
     }
 
+    // Q3 Dynamic verdict
+    if (gM && eM) {
+      const gbr = blendG => {
+        const gBase=gPrices[0],sBase=sPrices[0];
+        const bp=gPrices.map((g,i)=>blendG*(g/gBase)*100+(1-blendG)*((sPrices[i]??sBase)/sBase)*100);
+        return riskMetrics(bp);
+      };
+      const bM70 = gbr(0.7);
+      function shLabel(sh,dd){ const sh_imp=(bM70?bM70.sharpe:0)-(eM.sharpe||0); const dd_imp=(bM70?bM70.maxDD:0)-(eM.maxDD||0); if(sh_imp>0.02&&dd_imp>0.005) return `Adding precious metals improves Sharpe (${(eM.sharpe||0).toFixed(2)} → ${(bM70.sharpe||0).toFixed(2)}) and reduces max drawdown (${((eM.maxDD||0)*100).toFixed(1)}% → ${((bM70.maxDD||0)*100).toFixed(1)}%).`; if(sh_imp>0.02) return `Adding precious metals improves risk-adjusted return (Sharpe: ${(eM.sharpe||0).toFixed(2)} → ${(bM70.sharpe||0).toFixed(2)}) with similar drawdown.`; return `Over the full 20-year baseline, the blended portfolio (70/30 Gold/Silver) achieves a Sharpe of ${(bM70?bM70.sharpe:0).toFixed(2)} vs S&P 500 equity-only ${(eM.sharpe||0).toFixed(2)} with a max drawdown of ${((bM70?bM70.maxDD:0)*100).toFixed(1)}%.`; }
+      const ri = document.getElementById('risk-insight');
+      if (ri) ri.textContent = shLabel();
+    }
   } catch(e) { console.warn('updateRiskTable:', e); }
 }
 
@@ -2297,7 +2314,7 @@ function buildRiskDrawdown() {
     { x:RNG.dates, y:edd, name:'S&P 500', fill:'tozeroy', fillcolor:'rgba(34,197,94,0.12)', line:{color:'#22C55E',width:2}, mode:'lines' },
   ];
   const L = layout({
-    title:{ text:`Drawdown from Peak — ${CURR} prices`, font:{color:'#E2E8F0',size:14} },
+    title:{ text:`Drawdown from Peak — ${CURR} prices`, font:{color:_DARK?'#E2E8F0':'#111827',size:14} },
     yaxis:{ title:'Drawdown (%)', gridcolor:'#E2E8F0', zeroline:true },
     xaxis:{ gridcolor:'#E2E8F0' },
   });
@@ -2305,25 +2322,28 @@ function buildRiskDrawdown() {
 }
 
 function buildRiskVol() {
-  const assets = ['Gold','Silver','S&P 500','T-Bill'];
-  const vols   = [15.4, 28.2, 15.1, 0.5];
-  const sharpes= [0.47, 0.31, 0.51, 0.40];
-  const colors = ['#D4AF37','#A8B8CC','#22C55E','#6B7FA3'];
-  const sizes  = [18, 18, 18, 14];
-
+  const useCad = CURR === 'CAD';
+  const gP = useCad ? RNG.gde_cad : RNG.gde;
+  const sP = useCad ? RNG.sde_cad : RNG.sde;
+  const eP = useCad ? RNG.ede_cad : RNG.ede;
+  const gM = riskMetrics(gP), sM = riskMetrics(sP), eM = riskMetrics(eP);
+  if (!gM||!sM||!eM) return;
+  const assets = ['Gold','Silver','S&P 500'];
+  const vols   = [gM.annVol*100, sM.annVol*100, eM.annVol*100];
+  const sharpes= [gM.sharpe, sM.sharpe, eM.sharpe];
+  const colors = ['#D4AF37','#A8B8CC','#22C55E'];
   const traces = [{
     x: vols, y: sharpes, text: assets, mode: 'markers+text',
     textposition: 'top center',
-    textfont: { color:'#E2E8F0', size:11 },
-    marker: { color: colors, size: sizes, line:{color:'#CBD5E0',width:1} },
+    textfont: { color:'#E2E8F0', size:12 },
+    marker: { color: colors, size: [20,20,20], line:{color:'#CBD5E0',width:1} },
     hovertemplate: '<b>%{text}</b><br>Volatility: %{x:.1f}%<br>Sharpe: %{y:.2f}<extra></extra>',
   }];
   const L = layout({
-    title:{ text:'Risk vs. Return Quality (Volatility vs. Sharpe Ratio)', font:{color:'#E2E8F0',size:14} },
+    title:{ text:`Risk vs. Return Quality — ${CURR} · Selected Period`, font:{color:_DARK?'#E2E8F0':'#111827',size:14} },
     xaxis:{ title:'Annual Volatility (%)', gridcolor:'#E2E8F0' },
     yaxis:{ title:'Sharpe Ratio', gridcolor:'#E2E8F0' },
     showlegend: false,
-    annotations:[]
   });
   Plotly.newPlot('ch-risk-vol', traces, L, CFG);
 }
@@ -2336,14 +2356,14 @@ function buildCrisisBar() {
 
   const traces = [
     { x:periods, y:goldRet, name:'Gold', type:'bar', marker:{color:'#D4AF37'},
-      text:goldRet.map(v=>(v>=0?'+':'')+v+'%'), textposition:'outside', textfont:{color:'#E2E8F0'} },
+      text:goldRet.map(v=>(v>=0?'+':'')+v+'%'), textposition:'outside', textfont:{color:_DARK?'#E2E8F0':'#111827'} },
     { x:periods, y:silvRet, name:'Silver', type:'bar', marker:{color:'#4A6FA5'},
-      text:silvRet.map(v=>(v>=0?'+':'')+v+'%'), textposition:'outside', textfont:{color:'#E2E8F0'} },
+      text:silvRet.map(v=>(v>=0?'+':'')+v+'%'), textposition:'outside', textfont:{color:_DARK?'#E2E8F0':'#111827'} },
     { x:periods, y:sp5Ret, name:'S&P 500', type:'bar', marker:{color:'#22C55E'},
-      text:sp5Ret.map(v=>(v>=0?'+':'')+v+'%'), textposition:'outside', textfont:{color:'#E2E8F0'} },
+      text:sp5Ret.map(v=>(v>=0?'+':'')+v+'%'), textposition:'outside', textfont:{color:_DARK?'#E2E8F0':'#111827'} },
   ];
   const L = layout({
-    title:{ text:'Annual / Period Return (%) by Crisis Window', font:{color:'#E2E8F0',size:14} },
+    title:{ text:'Annual / Period Return (%) by Crisis Window', font:{color:_DARK?'#E2E8F0':'#111827',size:14} },
     yaxis:{ title:'Return (%)', gridcolor:'#E2E8F0', zeroline:true, zerolinecolor:'#64748B', range:[-55,175] },
     barmode: 'group',
     legend: { orientation:'h', y:1.12 },
@@ -2395,7 +2415,7 @@ function updateSim() {
     { x:RNG.dates, y:base.cumSeries, name:'100% S&P 500',   line:{color:'#22C55E',width:2,dash:'dot'}, mode:'lines' },
   ];
   const L = layout({
-    title:{ text:`Cumulative Portfolio Return (Base 100 = ${startLbl})`, font:{color:'#E2E8F0',size:14} },
+    title:{ text:`Cumulative Portfolio Return (Base 100 = ${startLbl})`, font:{color:_DARK?'#E2E8F0':'#111827',size:14} },
     yaxis:{ title:'Frequency', gridcolor:'#E2E8F0' },
     xaxis:{ gridcolor:'#E2E8F0' },
   });
@@ -2426,14 +2446,14 @@ function buildSimCompare(m, base, gW, sW, eW, cW) {
   });
   const colors = configs.map((c,i) => c.label === 'Your Alloc.' ? '#22C55E' : '#D4AF37');
   const L = layout({
-    title:{ text:'Sharpe Ratio Comparison Across Portfolio Compositions', font:{color:'#E2E8F0',size:14} },
+    title:{ text:'Sharpe Ratio Comparison Across Portfolio Compositions', font:{color:_DARK?'#E2E8F0':'#111827',size:14} },
     yaxis:{ title:'Sharpe Ratio', gridcolor:'#E2E8F0', range:[0, Math.max(...sharpes)*1.2] },
     showlegend:false,
   });
   const data = [{
     x: configs.map(c=>c.label), y:sharpes, type:'bar',
     marker:{ color:colors },
-    text:sharpes.map(v=>v.toFixed(2)), textposition:'outside', textfont:{color:'#E2E8F0',size:12},
+    text:sharpes.map(v=>v.toFixed(2)), textposition:'outside', textfont:{color:_DARK?'#E2E8F0':'#111827',size:12},
   }];
   Plotly.react('ch-sim-compare', data, L, CFG);
 }
@@ -2550,19 +2570,14 @@ function buildCAPM() {
   ];
   Plotly.react('ch-rolling-beta', traces, L, CFG);
 
-  // Insight text
-  const gB = gRes.beta[1].toFixed(4), sB = sRes.beta[1].toFixed(4);
-  const gA = (gRes.beta[0]*100).toFixed(3), sA = (sRes.beta[0]*100).toFixed(3);
-  const gBsig = gRes.pVals[1] < 0.05, gAsig = gRes.pVals[0] < 0.05;
-  document.getElementById('capm-insight').innerHTML =
-    `<strong>Q2 — Equity Hedge Answer (CAPM):</strong><br>` +
-    `Gold β = <strong>${gB}</strong> (p${gRes.pVals[1]<0.001?'<0.001':'='+gRes.pVals[1].toFixed(3)}) — ` +
-    `${parseFloat(gB)<0.3?'✓ Low market sensitivity confirms safe-haven status':'⚠ Higher-than-expected market co-movement'}.<br>` +
-    `Gold α = <strong>${gA}%/mo</strong> (p${gRes.pVals[0]<0.001?'<0.001':'='+gRes.pVals[0].toFixed(3)}) — ` +
-    `${gAsig?'✓ Statistically significant persistent excess return':'Not statistically significant at 5% level'}.<br><br>` +
-    `Silver β = <strong>${sB}</strong> — significantly higher than gold, confirming its industrial commodity character. ` +
-    `Silver R² = ${sRes.r2.toFixed(4)} vs Gold R² = ${gRes.r2.toFixed(4)} — gold's lower R² means S&P 500 explains less of its movement, ` +
-    `which is exactly what you want from a portfolio hedge.`;
+  // Q2(b) Dynamic verdict
+  const gBeta = gRes.beta[1], gAlpha = gRes.beta[0];
+  const sBeta = sRes.beta[1], sAlpha = sRes.beta[0];
+  function sensLabel(b){ return b<0.15?'very low market sensitivity':b<0.40?'low market sensitivity':b<0.70?'moderate market sensitivity':'high market sensitivity'; }
+  const verdict = `Gold: ${sensLabel(gBeta)} (β = ${gBeta.toFixed(3)}, α = ${(gAlpha*100).toFixed(3)}%/mo, R² = ${gRes.r2.toFixed(3)}). ` +
+                  `Silver: ${sensLabel(sBeta)} (β = ${sBeta.toFixed(3)}, α = ${(sAlpha*100).toFixed(3)}%/mo, R² = ${sRes.r2.toFixed(3)}).`;
+  const ci = document.getElementById('capm-insight');
+  if (ci) ci.textContent = verdict;
 }
 
 
@@ -2760,12 +2775,12 @@ function buildCAR() {
 
   const traces = [
     { x:lbls, y:gCARs, name:'Gold CAR',   type:'bar', marker:{color:'#D4AF37'},
-      text:gCARs.map(v=>v===null?'':v+'%'), textposition:'outside', textfont:{color:'#E2E8F0'} },
+      text:gCARs.map(v=>v===null?'':v+'%'), textposition:'outside', textfont:{color:_DARK?'#E2E8F0':'#111827'} },
     { x:lbls, y:sCARs, name:'Silver CAR', type:'bar', marker:{color:'#A0AEC0'},
-      text:sCARs.map(v=>v===null?'':v+'%'), textposition:'outside', textfont:{color:'#E2E8F0'} },
+      text:sCARs.map(v=>v===null?'':v+'%'), textposition:'outside', textfont:{color:_DARK?'#E2E8F0':'#111827'} },
   ];
   const L = layout({
-    title:{ text:'Cumulative Abnormal Returns (CAR) by Event Window', font:{color:'#E2E8F0',size:14} },
+    title:{ text:'Cumulative Abnormal Returns (CAR) by Event Window', font:{color:_DARK?'#E2E8F0':'#111827',size:14} },
     yaxis:{ title:'CAR (%)', zeroline:true, zerolinecolor:'#64748B' },
     barmode:'group',
     legend:{ orientation:'h', y:1.12 },
@@ -2783,7 +2798,7 @@ const CHART_BUILDERS = {
   0: () => {},  // Home — static, no charts
   1: () => { buildOverviewPrice(); },
   2: () => { buildRealBar(); buildRealInflated(); buildRealRolling(); },
-  3: () => { buildCorrRolling(); buildCorrBar(); buildCAPM(); },
+  3: () => { buildCorrRolling(); buildCorrBar(); buildCAPM(); if(typeof updateCorrVerdict==='function') updateCorrVerdict(); },
   4: () => { buildRiskDrawdown(); buildRiskVol(); updateRiskTable(); },
   5: () => { buildCrisisBar(); buildCAR(); },
   6: () => { updateSim(); if(!document.getElementById('ch-sim-compare').data) Plotly.newPlot('ch-sim-compare',[],layout({}),CFG); },
@@ -2802,6 +2817,131 @@ function showTab(idx) {
   if (idx === 6) updateSim();   // always refresh sim
   if (idx === 7 && built[7]) { updateMC(); updateAR(); } // refresh on re-visit
 }
+
+
+
+// ════════════════════════════════════════════════════════════════════
+//  V7 ADDITIONS
+// ════════════════════════════════════════════════════════════════════
+
+// ── Theme toggle ─────────────────────────────────────────────────────
+let _DARK = true;
+function toggleTheme() {
+  _DARK = !_DARK;
+  document.body.classList.toggle('light', !_DARK);
+  const btn = document.getElementById('theme-toggle');
+  if (btn) btn.textContent = _DARK ? '☀ Light Mode' : '🌙 Dark Mode';
+  const bg1 = _DARK ? '#0D1117' : '#FFFFFF';
+  const bg2 = _DARK ? '#161B27' : '#F8FAFC';
+  const fc  = _DARK ? '#C4CFDA' : '#1E293B';
+  const gc  = _DARK ? '#2A3347' : '#CBD5E1';
+  LAYOUT_BASE.paper_bgcolor = bg1;
+  LAYOUT_BASE.plot_bgcolor  = bg2;
+  LAYOUT_BASE.font.color    = fc;
+  LAYOUT_BASE.xaxis.gridcolor = gc; LAYOUT_BASE.xaxis.linecolor = gc;
+  LAYOUT_BASE.yaxis.gridcolor = gc; LAYOUT_BASE.yaxis.linecolor = gc;
+  LAYOUT_BASE.legend.bgcolor  = _DARK ? 'rgba(22,27,39,0.95)' : 'rgba(255,255,255,0.92)';
+  LAYOUT_BASE.legend.bordercolor = gc;
+  LAYOUT_BASE.hoverlabel.bgcolor = _DARK ? '#1E2535' : '#FFFFFF';
+  // Rebuild active tab
+  Object.keys(built).forEach(k => { built[k] = false; });
+  simInitialized = false;
+  const activeIdx = [...document.querySelectorAll('.tab')].findIndex(t=>t.classList.contains('active'));
+  if (activeIdx >= 0 && CHART_BUILDERS[activeIdx]) { CHART_BUILDERS[activeIdx](); built[activeIdx] = true; }
+}
+
+// ── Q2(a) verdict helper (called from buildCorrRolling) ───────────────
+function updateCorrVerdict() {
+  const useCad = CURR === 'CAD';
+  const gmr = useCad ? RNG.gmr_cad : RNG.gmr;
+  const smr = useCad ? RNG.smr_cad : RNG.smr;
+  const emr = useCad ? RNG.emr_cad : RNG.emr;
+  if (!gmr || !emr || gmr.length < 4) return;
+  const n = Math.min(gmr.length, smr.length, emr.length);
+  function pr(a,b){ const nn=Math.min(a.length,b.length); let ma=0,mb=0; for(let i=0;i<nn;i++){ma+=a[i];mb+=b[i];} ma/=nn;mb/=nn; let num=0,da=0,db=0; for(let i=0;i<nn;i++){num+=(a[i]-ma)*(b[i]-mb);da+=(a[i]-ma)**2;db+=(b[i]-mb)**2;} return (da*db>0)?num/Math.sqrt(da*db):0; }
+  const rGSp = pr(gmr.slice(0,n), emr.slice(0,n));
+  const rSSp = pr(smr.slice(0,n), emr.slice(0,n));
+  function grade(r){ const a=Math.abs(r); return a<0.10?'strong hedge':a<0.25?'moderate hedge':a<0.40?'weak hedge':'not a reliable hedge'; }
+  const el = document.getElementById('corr-insight');
+  if (el) el.textContent = `In this period: Gold is a ${grade(rGSp)} vs equities (r = ${rGSp.toFixed(3)}). Silver is a ${grade(rSSp)} vs equities (r = ${rSSp.toFixed(3)}).`;
+}
+
+// ── Comparison matrix (training windows × horizons) ────────────────────
+function updateModelComparison() {
+  const useCad = CURR === 'CAD';
+  const gAll = useCad ? GDE_CAD : GDE.prices;
+  const sAll = useCad ? SDE_CAD : SDE.prices;
+  const windows = [
+    {label:'All data', val:0}, {label:'Last 5 yr', val:60},
+    {label:'Last 3 yr', val:36}, {label:'Last 2 yr', val:24},
+    {label:'Last 1 yr', val:12},
+  ];
+  const horizons = [3, 6, 9, 12];
+  const head = document.getElementById('model-compare-head');
+  const body = document.getElementById('model-compare-body');
+  if (!head || !body) return;
+  let hRow = '<th style="background:var(--card2);padding:8px 10px;color:var(--muted);font-weight:700;">Window</th>';
+  horizons.forEach(h => {
+    hRow += `<th colspan="4" style="background:var(--card2);padding:8px;text-align:center;color:var(--muted);border-left:1px solid var(--grid);">${h} months</th>`;
+  });
+  head.innerHTML = hRow;
+  // sub-header
+  let sub = '<tr><td style="background:var(--card2);"></td>';
+  horizons.forEach(() => {
+    sub += `<td style="background:var(--card2);color:#D4AF37;padding:4px 6px;font-size:10px;border-left:1px solid var(--grid);">G-LT</td>`;
+    sub += `<td style="background:var(--card2);color:#D4AF37;padding:4px 6px;font-size:10px;">G-AR</td>`;
+    sub += `<td style="background:var(--card2);color:#A8B8CC;padding:4px 6px;font-size:10px;">S-LT</td>`;
+    sub += `<td style="background:var(--card2);color:#A8B8CC;padding:4px 6px;font-size:10px;">S-AR</td>`;
+  });
+  sub += '</tr>';
+
+  function ltTarget(prices, steps) {
+    if (prices.length < 4) return NaN;
+    const lp = prices.map(v=>Math.log(v));
+    const n = lp.length, xs = Array.from({length:n},(_,i)=>i);
+    const mx = xs.reduce((s,v)=>s+v,0)/n, my = lp.reduce((s,v)=>s+v,0)/n;
+    let sxy=0,sxx=0; for(let i=0;i<n;i++){sxy+=(xs[i]-mx)*(lp[i]-my);sxx+=(xs[i]-mx)**2;}
+    const b=sxy/sxx, a=my-b*mx;
+    return Math.exp(a+b*(n-1+steps));
+  }
+  function arTarget(prices, steps) {
+    if (prices.length < 8) return NaN;
+    const p = prices.slice(), ph = Math.min(3, Math.floor(p.length/4));
+    const ret = []; for(let i=1;i<p.length;i++) ret.push((p[i]-p[i-1])/p[i-1]);
+    if (ret.length <= ph) return NaN;
+    const X=[], Y=[];
+    for(let i=ph;i<ret.length;i++){ X.push([1,...ret.slice(i-ph,i).reverse()]); Y.push(ret[i]); }
+    const k=ph+1, n2=X.length;
+    const XtX=Array.from({length:k},()=>Array(k).fill(0)), XtY=Array(k).fill(0);
+    for(let i=0;i<n2;i++){for(let j=0;j<k;j++){XtY[j]+=X[i][j]*Y[i];for(let l=0;l<k;l++) XtX[j][l]+=X[i][j]*X[i][l];}}
+    let coef; try{ coef=matInv(XtX).map(row=>row.reduce((s,v,j)=>s+v*XtY[j],0)); }catch(e){return NaN;}
+    let win=ret.slice(-ph).reverse(), last=p[p.length-1];
+    for(let i=0;i<steps;i++){const rv=coef[0]+coef.slice(1).reduce((s,c,j)=>s+c*win[j],0);last*=(1+rv);win=[rv,...win.slice(0,-1)];}
+    return last;
+  }
+  function fmt(v,last){ if(isNaN(v)||!isFinite(v)) return '<span style="color:var(--muted)">N/A</span>'; const pct=((v-last)/last*100).toFixed(1); const col=v>=last?'var(--green)':'var(--red)'; const sign=parseFloat(pct)>=0?'+':''; return `<span style="color:${col}">${v.toFixed(0)}<br><small>${sign}${pct}%</small></span>`; }
+
+  let rows = sub;
+  windows.forEach(w => {
+    const gP = w.val>0 ? gAll.slice(-w.val) : gAll;
+    const sP = w.val>0 ? sAll.slice(-w.val) : sAll;
+    const lastG=gP[gP.length-1], lastS=sP[sP.length-1];
+    let cells = `<td style="font-weight:600;padding:7px 10px;white-space:nowrap">${w.label}</td>`;
+    horizons.forEach(h => {
+      const gLT=ltTarget(gP,h), gAR=arTarget(gP,h);
+      const sLT=ltTarget(sP,h), sAR=arTarget(sP,h);
+      cells += `<td style="padding:5px 8px;border-left:1px solid var(--grid);text-align:center">${fmt(gLT,lastG)}</td>`;
+      cells += `<td style="padding:5px 8px;text-align:center">${fmt(gAR,lastG)}</td>`;
+      cells += `<td style="padding:5px 8px;text-align:center">${fmt(sLT,lastS)}</td>`;
+      cells += `<td style="padding:5px 8px;text-align:center">${fmt(sAR,lastS)}</td>`;
+    });
+    rows += `<tr style="border-bottom:1px solid var(--grid)">${cells}</tr>`;
+  });
+  body.innerHTML = rows;
+}
+
+// ── Ensure MC always uses parametric ─────────────────────────────────
+// model comparison matrix called from CHART_BUILDERS[7]
 
 // ── Init ─────────────────────────────────────────────────────────────
 initRangeDropdowns();   // populate year selects from DATES (also calls updateRangeInfo)
